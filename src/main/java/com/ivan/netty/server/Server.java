@@ -1,7 +1,9 @@
 package com.ivan.netty.server;
 
+import com.ivan.netty.server.encode.TimeEncoder1;
 import com.ivan.netty.server.handler.EchoServerHandler;
 import com.ivan.netty.server.handler.TimeServerHandler;
+import com.ivan.netty.server.handler.TimeServerHandler1;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -42,7 +44,8 @@ public class Server {
                             // ch.pipeline().addLast(new DiscardServerHandler());
                             // ch.pipeline().addLast(new PrintServerHandler());
                             // ch.pipeline().addLast(new EchoServerHandler());
-                            ch.pipeline().addLast(new TimeServerHandler());
+                            // ch.pipeline().addLast(new TimeServerHandler());
+                            ch.pipeline().addLast(new TimeEncoder1(), new TimeServerHandler1());
                         }
                     })
                     .option(ChannelOption.SO_BACKLOG, 128)

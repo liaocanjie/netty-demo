@@ -1,6 +1,10 @@
 package com.ivan.netty.client;
 
+import com.ivan.netty.client.decode.TimeDecoder;
+import com.ivan.netty.client.decode.TimeDecoder1;
 import com.ivan.netty.client.handler.TimeClientHandler;
+import com.ivan.netty.client.handler.TimeClientHandler1;
+import com.ivan.netty.client.handler.TimeClientHandler2;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -25,7 +29,9 @@ public class Client {
             b.handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 public void initChannel(SocketChannel ch) throws Exception {
-                    ch.pipeline().addLast(new TimeClientHandler());
+                    // ch.pipeline().addLast(new TimeClientHandler());
+                    // ch.pipeline().addLast(new TimeDecoder(), new TimeClientHandler1());
+                    ch.pipeline().addLast(new TimeDecoder1(), new TimeClientHandler2());
                 }
             });
 
